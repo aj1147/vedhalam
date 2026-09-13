@@ -1,7 +1,7 @@
 <img width="1280" height="640" alt="image" src="https://github.com/user-attachments/assets/e21a98ce-b525-42d4-8ab1-802f7480a437" />
 
 
-Vedhalam 🎯
+VEDHALAM🎯
 
 Basic Details
 
