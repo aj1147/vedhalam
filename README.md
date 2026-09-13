@@ -126,6 +126,8 @@ health check ai that gives ridiculous medical analysis
 
 **-DEMO VIDEO**
 
+https://drive.google.com/file/d/1uUOb-aJWFqPwkYPsqhbN51XaAegZYFDe/view?usp=drivesdk
+
 Made with ❤️ at TinkerHub Useless Projects
 ￼
  
