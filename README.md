@@ -124,7 +124,7 @@ smart notes that shows the opposite of what's entered
 <img width="1600" height="735" alt="image" src="https://github.com/user-attachments/assets/d4be6c3d-4510-4794-b708-cc364ed855ee" />
 health check ai that gives ridiculous medical analysis
 
-
+**-DEMO VIDEO**
 
 Made with ❤️ at TinkerHub Useless Projects
 ￼
