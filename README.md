@@ -23,7 +23,7 @@ It does all of that.
 
 Just not correctly.
 
-Inspired by modern productivity tools such as Notion and Linear, Vedhalam provides a polished and minimal interface while quietly sabotaging the user's productivity at every possible opportunity.
+Inspired by modern productivity tools, Vedhalam provides a polished and minimal interface while quietly sabotaging the user's productivity at every possible opportunity.
 
 The more you trust it, the worse it gets.
 
