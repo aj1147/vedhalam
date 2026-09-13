@@ -1,14 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SplashScreen } from './components/SplashScreen';
 import { Navbar } from './components/Navbar';
 import { DashboardHub } from './components/DashboardHub';
 import { SmartNotes } from './components/SmartNotes';
 import { HealthCheckAI } from './components/HealthCheckAI';
 import { DisruptiveNotifications } from './components/DisruptiveNotifications';
+import { stopSillySound } from './utils/soundSynth';
 
 export function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [currentView, setCurrentView] = useState<'hub' | 'notes' | 'health'>('hub');
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        stopSillySound();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0a0d14] text-slate-100 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
