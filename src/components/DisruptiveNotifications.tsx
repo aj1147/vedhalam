@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Bell, BatteryLow, X, Gamepad2 } from 'lucide-react';
 import { MoviePosterModal, FAKE_MOVIES } from './MoviePosterModal';
 import type { MoviePosterData } from './MoviePosterModal';
-import { playSillySound } from '../utils/soundSynth';
+import { startSillySound } from '../utils/soundSynth';
 
 export interface DisruptiveNotificationItem {
   id: string;
@@ -59,14 +59,14 @@ export const DisruptiveNotifications: React.FC = () => {
       if (Math.random() < 0.3) {
         const randomMovie = FAKE_MOVIES[Math.floor(Math.random() * FAKE_MOVIES.length)];
         setActiveMovie(randomMovie);
-        playSillySound('air_horn');
+        startSillySound('air_horn');
       } else {
         const template = ABSURD_NOTIFICATIONS[Math.floor(Math.random() * ABSURD_NOTIFICATIONS.length)];
         setCurrentNotification({
           ...template,
           id: Date.now().toString()
         });
-        playSillySound('boing');
+        startSillySound('boing');
       }
     }, 22000);
 
@@ -78,7 +78,7 @@ export const DisruptiveNotifications: React.FC = () => {
   };
 
   const handleOptionClick = (option: string) => {
-    playSillySound('duck_quack');
+    startSillySound('duck_quack');
     alert(`Vedhalam Response Logged: "${option}". Thank you for your obedience.`);
     setCurrentNotification(null);
   };

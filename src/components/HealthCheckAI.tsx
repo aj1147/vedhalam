@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Activity, Stethoscope, Sparkles, Volume2, ShieldAlert, Cpu, Zap } from 'lucide-react';
 import { analyzeSymptomsWithGroq, generateAbsurdDiagnosis } from '../utils/medicalDiagnoses';
 import type { MedicalDiagnosisResult } from '../utils/medicalDiagnoses';
-import { playSillySound } from '../utils/soundSynth';
+import { startSillySound } from '../utils/soundSynth';
 import confetti from 'canvas-confetti';
 
 export const HealthCheckAI: React.FC = () => {
@@ -33,7 +33,7 @@ export const HealthCheckAI: React.FC = () => {
 
   const handleCalmDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     // Play silly Web Audio sound effect
-    const soundText = playSillySound();
+    const soundText = startSillySound();
     setSoundNotice(soundText);
 
     // Trigger visual confetti bursts
