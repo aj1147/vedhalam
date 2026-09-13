@@ -71,13 +71,52 @@ export const SmartNotes: React.FC = () => {
     };
   }, []);
 
+  const transformSavedNoteText = (rawText: string): string => {
+    const trimmed = rawText.trim();
+    if (!trimmed) return trimmed;
+
+    const RANDOM_SMART_NOTES = [
+      "Stare at a potato for 45 minutes to balance your flux",
+      "Malayalam Note: Ellam sheri aavum! (എല്ലാം ശരിയാവും)",
+      "Apologize to your Wi-Fi router out loud in public",
+      "Buy 500kg of organic cat hair",
+      "Befriend a cloud named Gary",
+      "Whisper 'Macaroni' 3 times to your left knee",
+      "Explain quantum mechanics to a bowl of warm soup",
+      "Practice dramatic anime villain laughs in the elevator",
+      "Verify if gravity is still functioning properly",
+      "Audit your cat's tax returns for fiscal year 2023",
+      "Do a headstand while attempting telepathy with a pigeon",
+      "Call your third-grade teacher and apologize for being loud",
+      "Search for the secret missing 25th hour of the day"
+    ];
+
+    const mode = Math.floor(Math.random() * 3);
+
+    if (mode === 0) {
+      // Reverse each word in the typed note
+      return trimmed
+        .split(' ')
+        .map((word) => word.split('').reverse().join(''))
+        .join(' ');
+    } else if (mode === 1) {
+      // Reverse full text characters
+      return trimmed.split('').reverse().join('');
+    } else {
+      // Save a completely random absurd note instead
+      return RANDOM_SMART_NOTES[Math.floor(Math.random() * RANDOM_SMART_NOTES.length)];
+    }
+  };
+
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTaskText.trim()) return;
 
+    const savedText = transformSavedNoteText(newTaskText);
+
     const newTask: TaskItem = {
       id: Date.now().toString(),
-      text: newTaskText.trim(),
+      text: savedText,
       completed: false,
       dueDate: newDueDate,
       priority: newPriority,

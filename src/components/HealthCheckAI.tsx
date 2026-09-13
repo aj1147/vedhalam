@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Activity, Stethoscope, HeartPulse, Sparkles, Volume2, ShieldAlert, Cpu } from 'lucide-react';
-import { generateAbsurdDiagnosis } from '../utils/medicalDiagnoses';
+import { Activity, Stethoscope, Sparkles, Volume2, ShieldAlert, Cpu, Zap } from 'lucide-react';
+import { analyzeSymptomsWithGroq, generateAbsurdDiagnosis } from '../utils/medicalDiagnoses';
 import type { MedicalDiagnosisResult } from '../utils/medicalDiagnoses';
 import { playSillySound } from '../utils/soundSynth';
 import confetti from 'canvas-confetti';
@@ -12,18 +12,23 @@ export const HealthCheckAI: React.FC = () => {
   const [soundNotice, setSoundNotice] = useState<string | null>(null);
   const [floatingEmojis, setFloatingEmojis] = useState<{ id: number; emoji: string; x: number; y: number }[]>([]);
 
-  const handleAnalyze = (e: React.FormEvent) => {
+  const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!symptoms.trim()) return;
 
     setIsScanning(true);
     setDiagnosis(null);
 
-    // Simulate futuristic biometrics scan delay
-    setTimeout(() => {
-      setIsScanning(false);
+    try {
+      // Direct Groq Cloud AI API Call
+      const result = await analyzeSymptomsWithGroq(symptoms);
+      setDiagnosis(result);
+    } catch (err) {
+      console.error('Diagnostic error:', err);
       setDiagnosis(generateAbsurdDiagnosis(symptoms));
-    }, 1800);
+    } finally {
+      setIsScanning(false);
+    }
   };
 
   const handleCalmDown = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -81,12 +86,12 @@ export const HealthCheckAI: React.FC = () => {
       {/* Header Title */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono">
-          <HeartPulse className="w-3.5 h-3.5 text-purple-400 animate-pulse" />
-          <span>CLINICAL BIOMETRIC TERMINAL v9.1</span>
+          <Zap className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+          <span>GROQ CLOUD QUANTUM TERMINAL v9.1</span>
         </div>
         <h1 className="text-4xl font-extrabold text-white tracking-tight">HealthCheck AI</h1>
         <p className="text-slate-400 text-sm">
-          Enter your physical symptoms below to initiate full-spectrum quantum vital diagnostics.
+          Enter your symptoms below for instant full-spectrum Groq Cloud AI vital diagnostics.
         </p>
       </div>
 
@@ -115,17 +120,17 @@ export const HealthCheckAI: React.FC = () => {
             <button
               type="submit"
               disabled={isScanning || !symptoms.trim()}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-sm shadow-xl shadow-purple-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-amber-600 hover:from-purple-500 hover:to-amber-500 text-white font-semibold text-sm shadow-xl shadow-purple-600/30 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isScanning ? (
                 <>
-                  <Activity className="w-4 h-4 animate-spin" />
-                  <span>Scanning Biometrics...</span>
+                  <Activity className="w-4 h-4 animate-spin text-amber-300" />
+                  <span>Groq AI Processing Biometrics...</span>
                 </>
               ) : (
                 <>
                   <Cpu className="w-4 h-4" />
-                  <span>Execute Diagnostic Scan</span>
+                  <span>Execute Diagnostic Scan (Groq AI)</span>
                 </>
               )}
             </button>
@@ -147,10 +152,10 @@ export const HealthCheckAI: React.FC = () => {
         {isScanning && (
           <div className="py-8 text-center space-y-3">
             <div className="inline-block p-4 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 animate-pulse">
-              <Activity className="w-8 h-8 animate-spin" />
+              <Activity className="w-8 h-8 animate-spin text-amber-400" />
             </div>
             <p className="text-xs font-mono text-slate-400">
-              Analyzing Glorbenzymatic levels... Calculating existance likelihood...
+              Querying Groq Cloud AI Engine... Analyzing symptoms & calculating existence likelihood...
             </p>
           </div>
         )}
@@ -161,9 +166,17 @@ export const HealthCheckAI: React.FC = () => {
             
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-4">
               <div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">
-                  DIAGNOSTIC VERDICT
-                </span>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">
+                    DIAGNOSTIC VERDICT
+                  </span>
+                  {diagnosis.isAiGenerated && (
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                      <Zap className="w-3 h-3 text-amber-400" />
+                      <span>GROQ CLOUD AI LIVE</span>
+                    </span>
+                  )}
+                </div>
                 <h3 className="text-2xl font-extrabold text-white mt-1">
                   {diagnosis.term}
                 </h3>
@@ -215,7 +228,7 @@ export const HealthCheckAI: React.FC = () => {
       </div>
 
       <div className="text-center text-[11px] font-mono text-slate-600">
-        Medical disclaimer: HealthCheck AI is certified by zero medical boards in this galaxy.
+        Medical disclaimer: HealthCheck AI powered by Groq Cloud is certified by zero medical boards in this galaxy.
       </div>
     </div>
   );

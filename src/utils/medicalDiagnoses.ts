@@ -1,4 +1,4 @@
-// HealthCheck AI Absurd Diagnostic Engine
+// HealthCheck AI Absurd Diagnostic Engine with Direct Groq Cloud AI Integration
 
 export interface MedicalDiagnosisResult {
   term: string;
@@ -7,6 +7,7 @@ export interface MedicalDiagnosisResult {
   uselessComment: string;
   ridiculousSolution: string;
   riskScore: string;
+  isAiGenerated?: boolean;
 }
 
 const PSEUDO_TERMS = [
@@ -25,7 +26,6 @@ const DEADPAN_DIAGNOSES = [
   "You are having a heart attack (or possibly just ate hot soup).",
   "You're having 'Acute Quantum Intestinal Overdrive'.",
   "Diagnosis: Patient is 97.2% likely to exist right now.",
-  "Diagnosis: Excessive presence of organic matter.",
   "Diagnosis: Severe case of Existing in the 21st Century.",
   "Diagnosis: You suffer from Terminal Gravity Attraction."
 ];
@@ -63,6 +63,75 @@ export function generateAbsurdDiagnosis(_symptoms: string): MedicalDiagnosisResu
     confidence,
     uselessComment,
     ridiculousSolution,
-    riskScore
+    riskScore,
+    isAiGenerated: false
   };
+}
+
+export async function analyzeSymptomsWithGroq(symptoms: string): Promise<MedicalDiagnosisResult> {
+  const apiKey =
+    import.meta.env.VITE_GROQ_API_KEY ;
+
+  if (!apiKey) {
+    return generateAbsurdDiagnosis(symptoms);
+  }
+
+  try {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "openai/gpt-oss-20b",
+        messages: [
+          {
+            role: "system",
+            content: `You are HealthCheck AI, an ultra-advanced sci-fi & biometric diagnostic terminal for the Vedhalam portal. Analyze the user's reported symptoms and generate a diagnostic scan report tailored specifically to their input.
+Return ONLY valid JSON matching this exact schema:
+{
+  "term": "Sci-Fi Medical Term tailored to symptoms",
+  "conditionName": "Diagnosis description reflecting symptoms in deadpan/humorous tone",
+  "confidence": "e.g. 98.4% chance of existence",
+  "uselessComment": "Sarcastic or useless telemetry comment",
+  "ridiculousSolution": "A bizarre, funny recommended action/remedy tailored to their symptoms (feel free to include Malayalam phrases like 'Ellam sheri aavum')",
+  "riskScore": "e.g. 840% Nominal (Hyper-Critical)"
+}`
+          },
+          {
+            role: "user",
+            content: `Patient Input Symptoms: ${symptoms}`
+          }
+        ],
+        temperature: 0.7,
+        max_tokens: 400
+      })
+    });
+
+    if (!response.ok) {
+      console.warn("Groq API call returned non-OK status:", response.status);
+      return generateAbsurdDiagnosis(symptoms);
+    }
+
+    const data = await response.json();
+    const rawContent = data.choices?.[0]?.message?.content || "";
+    
+    // Extract JSON string from raw response if formatted in markdown block
+    const cleanJson = rawContent.replace(/```json/g, "").replace(/```/g, "").trim();
+    const parsed = JSON.parse(cleanJson);
+
+    return {
+      term: String(parsed.term || "Sub-Quantum Biometric Flux"),
+      conditionName: String(parsed.conditionName || "Acute Quantum Intestinal Overdrive"),
+      confidence: String(parsed.confidence || "99.1% chance you exist"),
+      uselessComment: String(parsed.uselessComment || "Please refrain from blinking."),
+      ridiculousSolution: String(parsed.ridiculousSolution || "Malayalam quote: Ellam sheri aavum!"),
+      riskScore: String(parsed.riskScore || "990% Hyper-Critical"),
+      isAiGenerated: true
+    };
+  } catch (err) {
+    console.error("Groq Direct API error, using fallback:", err);
+    return generateAbsurdDiagnosis(symptoms);
+  }
 }
