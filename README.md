@@ -1,22 +1,18 @@
+<img width="1280" height="640" alt="image" src="https://github.com/user-attachments/assets/e21a98ce-b525-42d4-8ab1-802f7480a437" />
 
-# Vedhalam 🎯
-### Your Ultimate USEFULL Companion
 
-> A premium productivity app that helps you accomplish absolutely nothing.
+Vedhalam 🎯
 
----
+Basic Details
 
-## Basic Details
+Team Name: Useless Inc
 
-### Team Name : Useless.Inc
-### Team Members
- 
-Fiza Fathima PP - School of Engineering, CUSAT
-Arya Jayaprasad - School of Engineering, CUSAT 
+Team Members
 
----
+* Team Lead: Fiza Fathima PP - School of engineering,CUSAT
+* Member 2: Arya Jayaprasad - School of engineering, CUSAt
 
-## Project Description
+Project Description
 
 **Vedhalam** is a beautifully designed productivity application that looks like it was built to organize your life, improve your focus, and keep you on track.
 
@@ -28,9 +24,7 @@ Inspired by modern productivity tools, Vedhalam provides a polished and minimal 
 
 The more you trust it, the worse it gets.
 
----
-
-## The Problem (that doesn't exist)
+The Problem (that doesn't exist)
 
 People are already too productive.
 
@@ -43,9 +37,7 @@ This is clearly a problem.
 
 **Vedhalam solves this completely unnecessary problem by making productivity unnecessarily difficult.**
 
----
-
-## The Solution (that nobody asked for)
+The Solution (that nobody asked for)
 
 Vedhalam disguises chaos as productivity.
 
@@ -61,78 +53,26 @@ Everything looks professional.
 
 Everything behaves incorrectly.
 
----
-
-# Features
-
-## 1. Smart Notes 📝
-
-A clean and professional task-management system featuring:
-
-- Task creation
-- Checkboxes
-- Due dates
-- Priority tags
-- Task completion
-- Persistent saved tasks
-
-It looks completely legitimate.
-
-Until it isn't.
-
-### The Sabotage
-
-Vedhalam secretly modifies your tasks after you leave.
-
-Completed tasks may become incomplete.
-
-Task descriptions may mysteriously change.
-
-And occasionally, completely unnecessary tasks appear.
-
-For example:
-
-```text
-Buy groceries
-        ↓
-Reconsider all your life choices
-
 Technical Details
 
-Technologies / Components Used
-For Software
-HTML / JSX
-CSS
-JavaScript / TypeScript
-React
-Vite
-Local Storage
-Web APIs
-Git & GitHub
-UI / Design
-Responsive layouts
-Modern card-based interface
-Toast notifications
-Modal popups
-Micro-animations
-Interactive task components
-Custom audio interactions
+Technologies/Components Used
+
+For Software:
+* Technical Details
+*Technologies / Components Used
+*For Software
+*HTML / JSX
+*CSS
+*JavaScript / TypeScript
+*React
+*Vite
+*Local Storage
+*Web APIs
+*Git & GitHub
 
 Implementation
 
-Smart Notes
-Tasks are stored locally so that the application can remember the user's productivity.
-However, Vedhalam intentionally introduces randomized mutations to the stored task data.
-Possible mutations include:
-Completed → Incomplete
-
-Task A → Task B
-
-Existing Task → Random Task
-
-Normal Task → Existential Crisis
-These changes are designed to happen subtly rather than immediately, making the application appear functional at first glance.
-
+For Software:
 Installation
 
 Clone the repository:
@@ -143,12 +83,15 @@ Install dependencies:
 npm install
 Start the development server:
 npm run dev
-Open the local URL provided by Vite in your browser.
+Open the local URL provided by Vite in your browser
+
 
 Run
 npm run dev
 For production build:
 npm run build
+
+
 Project Documentation
 Vedhalam consists of multiple intentionally disruptive components:
                     VEDHALAM
@@ -166,4 +109,27 @@ Notes        AI             Toasts  Alerts  Chaos
                    │
              User Confusion
 
-             
+
+
+
+For Software:
+Screenshots (Add at least 3)
+
+<img width="1600" height="723" alt="image" src="https://github.com/user-attachments/assets/bc2811d2-1fd7-40a6-89f7-9b00e63be0c4" />
+main interface
+
+
+<img width="1600" height="733" alt="image" src="https://github.com/user-attachments/assets/4c7baeab-1897-4b9a-8002-f5c198b6286d" />
+smart notes that shows the opposite of what's entered
+
+<img width="1600" height="735" alt="image" src="https://github.com/user-attachments/assets/d4be6c3d-4510-4794-b708-cc364ed855ee" />
+health check ai that gives ridiculous medical analysis
+
+
+
+Made with ❤️ at TinkerHub Useless Projects
+￼
+ 
+￼
+
+ 
